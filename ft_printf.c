@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/03 18:45:53 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:44:29 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ t_data	*init_data(t_data *data)
 	flags->modifier[1] = 0;
 	data->flags = flags;
 	data->len = 0;
-	ft_bzero(data->buff, BUFF_SIZE + 1);
+	ft_bzero(data->buff, BUFF_SIZE);
 	data->b_len = 0;
+	data->arg_len = 0;
 	return (data);
 }
 
@@ -49,33 +50,38 @@ t_data	*reset_data(t_data *data)
 	}
 	data->flags->modifier[0] = 0;
 	data->flags->modifier[1] = 0;
+	data->arg_len = 0;
 	return (data);
 }
 
 char	*ft_buff_cat(char *str, t_data *data)
 {
-	if (!(str = ft_realloccat(str, data->buff, data->len, data->b_len + 1)))
+	if (!(str = ft_realloccat(str, data->buff, data->len, data->b_len)))
 		return (NULL);
-	ft_bzero(data->buff, BUFF_SIZE + 1);
+	ft_bzero(data->buff, BUFF_SIZE);
+	data->len += data->b_len;
 	data->b_len = 0;
 	return (str);
 }
 
 char	*ft_process(const char *f, va_list ap, t_data *data)
 {
-	int	i;
+	int		i;
+	char	*arg;
 
 	i = 0;
+	arg = NULL;
 	while (f[data->i])
 	{
 		if (i == BUFF_SIZE)
 			ft_buff_cat(str, data) ? i = 0 : return (NULL);
-		else if (f[data->i] == '%')
+		if (f[data->i] == '%')
 		{
 			ft_buff_cat(str, data) ? i = 0 : return (NULL);
-			ft_realloccat(str, ft_get_arg(f, ap, data), data->len, data->b_len + 1);
-			if (str == NULL)
+			arg = ft_get_arg(f, ap, data);
+			if (!(str = ft_realloccat(str, arg, data->len, data->arg_len)))
 				return (NULL);
+			data->len += data->arg_len;
 			data = reset_data(data);
 		}
 		else

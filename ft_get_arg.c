@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/03 19:19:09 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/08 15:49:12 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 		return (ft_width(ft_strdup("%"), 1, data->flags));
 	}
 	else if (is_type_flag(format[data->i]))
-		return (ft_print_controller(f[(data->i)++], ap, data));
+		return (ft_controller(f[(data->i)++], ap, data));
 	else
 		return (NULL);
 	(data->i)++;
