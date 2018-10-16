@@ -6,14 +6,14 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:55:36 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 18:55:38 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:25:43 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-char	*ft_conv_ld(va_list ap, t_flags *flags, t_data *data)
+char	*ft_conv_ld(va_list ap, t_spec *spec, t_data *data)
 {
-	flags->modifier[0] = 'l';
-	return (ft_print_d(ap, flags, data));
+	spec->mod[0] = 'l';
+	return (ft_print_d(ap, spec, data));
 }

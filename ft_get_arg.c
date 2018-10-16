@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 15:49:12 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:09:42 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int		is_type_flag(const char c)
+int		is_format_type(const char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D'
 			|| c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U'
@@ -48,37 +48,37 @@ int		get_num(const char *f, t_data *data)
 
 void	get_modifier(const char *f, t_data *data)
 {
-	if (data->flags->modifier[0] == 'h' && f[data->i] == 'h')
-		data->flags->modifier[1] = 'h';
-	else if (data->flags->modifier[0] == 'l' && f[data->i] == 'l')
-		data->flags->modifier[1] = 'l';
-	else if (f[data->i] > data->flags->modifier[0])
+	if (data->spec->mod[0] == 'h' && f[data->i] == 'h')
+		data->spec->mod[1] = 'h';
+	else if (data->spec->mod[0] == 'l' && f[data->i] == 'l')
+		data->spec->mod[1] = 'l';
+	else if (f[data->i] > data->spec->mod[0])
 	{
-		data->flags->modifier[0] = f[data->i];
-		data->flags->modifier[1] = 0;
+		data->spec->mod[0] = f[data->i];
+		data->spec->mod[1] = 0;
 	}
-	else if (data->flags->modifier[0] == 0)
-		data->flags->modifier[0] = f[data->i];
+	else if (data->spec->mod[0] == 0)
+		data->spec->mod[0] = f[data->i];
 }
 
-void	ft_get_flags(const char *f, t_data *data, int i)
+void	ft_get_spec(const char *f, t_data *data, int i)
 {
-	while (f[data->i] && f[data->i] != '%' && !is_type_flag(f[data->i]))
+	while (f[data->i] && f[data->i] != '%' && !is_format_type(f[data->i]))
 	{
 		if (f[data->i] == '#')
-			data->flags->options[0] = 1;
+			data->spec->flags[0] = 1;
 		if (f[data->i] == '-')
-			data->flags->options[1] = 1;
+			data->spec->flags[1] = 1;
 		if (f[data->i] == '+')
-			data->flags->options[2] = 1;
-		if (f[data->i] == ' ' && !data->flags->options[2])
-			data->flags->options[2] = 2;
-		if (f[data->i] == '0' && !data->flags->options[1])
-			data->flags->options[1] = 2;
+			data->spec->flags[2] = 1;
+		if (f[data->i] == ' ' && !data->spec->flags[2])
+			data->spec->flags[2] = 2;
+		if (f[data->i] == '0' && !data->spec->flags[1])
+			data->spec->flags[1] = 2;
 		if (f[data->i] >= '1' && f[data->i] <= '9')
-			data->flags->options[3] = get_num(f, data);
+			data->spec->width = get_num(f, data);
 		if (f[data->i] == '.')
-			data->flags->options[4] = get_num(f, data);
+			data->spec->prec = get_num(f, data);
 		if (f[data->i] == 'h' || f[data->i] == 'l'
 				|| f[data->i] == 'j' || f[data->i] == 'z')
 			get_modifier(f, data);
@@ -88,17 +88,22 @@ void	ft_get_flags(const char *f, t_data *data, int i)
 
 char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 {
-	int	i;
+	int		i;
+	char	*str;
 
+	str = NULL;
 	i = data->i;
 	(data->i)++;
-	ft_get_flags(f, data, i);
+	ft_get_spec(f, data, i);
 	if (f[data->i] == '%')
 	{
 		(data->i)++;
-		return (ft_width(ft_strdup("%"), 1, data->flags));
+		if ((str = ft_width(ft_strdup("%"), 1, data->spec)) == NULL)
+			return (NULL);
+		data->arg_len = ft_strlen(str);
+		return (str);
 	}
-	else if (is_type_flag(format[data->i]))
+	else if (is_format_type(f[data->i]))
 		return (ft_controller(f[(data->i)++], ap, data));
 	else
 		return (NULL);

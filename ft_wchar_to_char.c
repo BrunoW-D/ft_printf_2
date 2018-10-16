@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:16:57 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 16:17:14 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:43:14 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 char	*ft_wchar_to_char(wchar_t wc)
 {
 	char	str[5];
-	int		i;
 
-	i = 0;
-	while (i < 5)
-	{
-		str[i] = '\0';
-		i++;
-	}
+	str = ft_bzero(str, 5);
 	if (wc <= 0x7f)
 		str[0] = (char)wc;
 	else if (wc <= 0x7ff)

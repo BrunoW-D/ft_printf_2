@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:49:23 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 15:54:49 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:06:39 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-static char	*(*g_p[14]) (va_list ap, t_flags *flags);
+static char	*(*g_p[14]) (va_list ap, t_spec *spec, t_data *data);
 static char	*g_types = "sSpdDioOuUxXcC";
 
 void	init_p(void)
@@ -37,6 +37,7 @@ char	*ft_print_controller(char c, va_list ap, t_data *data)
 {
 	int		i;
 	char	*arg;
+	int		len;
 
 	init_p();
 	i = 0;
@@ -44,8 +45,13 @@ char	*ft_print_controller(char c, va_list ap, t_data *data)
 	{
 		if (c == g_types[i])
 		{
-			if ((arg = g_p[i](ap, data->flags)) == NULL)
+			if ((arg = g_p[i](ap, data->spec, data)) == NULL)
 				return (NULL);
+			len = ft_strlen(arg);
+			if (len)
+				data->arg_len = len;
+			else
+				data->arg_len = 1;
 		}
 		i++;
 	}

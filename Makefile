@@ -6,7 +6,7 @@
 #    By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 13:37:42 by bwang-do          #+#    #+#              #
-#    Updated: 2018/06/16 18:50:37 by bwang-do         ###   ########.fr        #
+#    Updated: 2018/10/16 17:02:05 by bwang-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,30 +16,29 @@ CC = gcc
 
 NAME = libftprintf.a
 
-SRC = ft_convert.c \
-	  ft_realloc.c \
+SRC = ft_get_arg.c \
+	  ft_realloccat.c \
 	  ft_realloc_free.c \
 	  ft_wchar_to_char.c \
-	  ft_print_controller.c \
+	  ft_controller.c \
 	  ft_base.c \
 	  ft_nchar.c \
 	  new_itoa.c \
 	  ft_utoa.c \
 	  ft_printf.c \
-	  ft_print_s.c \
-	  ft_print_ls.c \
-	  ft_print_c.c \
-	  ft_print_lc.c \
-	  ft_print_d.c \
-	  ft_print_ld.c \
-	  ft_print_o.c \
-	  ft_print_lo.c \
-	  ft_print_x.c \
-	  ft_print_lx.c \
-	  ft_print_u.c \
-	  ft_print_lu.c \
-	  ft_print_p.c \
-	  ft_strlower.c \
+	  ft_conv_s.c \
+	  ft_conv_ls.c \
+	  ft_conv_c.c \
+	  ft_conv_lc.c \
+	  ft_conv_d.c \
+	  ft_conv_ld.c \
+	  ft_conv_o.c \
+	  ft_conv_lo.c \
+	  ft_conv_x.c \
+	  ft_conv_lx.c \
+	  ft_conv_u.c \
+	  ft_conv_lu.c \
+	  ft_conv_p.c \
 	  ft_strupper.c \
 	  ft_width.c \
 

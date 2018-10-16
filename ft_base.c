@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 17:25:22 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 17:25:47 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 16:38:49 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char		*ft_ibase(long long n, int base)
 {
 	char		*nbr;
 	long long	nb;
-	int 		len;
+	int			len;
 
 	nb = n;
 	len = 1;
