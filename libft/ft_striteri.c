@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/10 10:19:38 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/11/13 17:34:46 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	char	*ret;
+	unsigned int	i;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
-		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
+	if (s && f)
+	{
+		i = 0;
+		while (s[i])
+		{
+			(*f)(i, s + i);
+			i++;
+		}
+	}
 }

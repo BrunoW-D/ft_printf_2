@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/10 10:30:03 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/12/29 15:57:16 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
 {
-	char	*ret;
+	t_list	*list;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
-		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
+	list = *alst;
+	while (list)
+	{
+		*alst = list;
+		list = (*alst)->next;
+		ft_lstdelone(alst, (*del));
+	}
 }

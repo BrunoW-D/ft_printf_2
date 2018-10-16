@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/07 17:35:14 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/11/13 17:46:14 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+char	*ft_strtrim(char const *s)
 {
-	char	*ret;
+	char	*dst;
+	int		i;
+	int		j;
+	int		k;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
+	if (!s)
 		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
+	i = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i++;
+	j = i;
+	while (s[j])
+		j++;
+	j--;
+	while (j > i && (s[j] == ' ' || s[j] == '\n' || s[j] == '\t'))
+		j--;
+	if ((dst = ft_strnew(j - i + 1)) == NULL)
+		return (NULL);
+	k = 0;
+	while (i + k <= j)
+	{
+		dst[k] = s[i + k];
+		k++;
+	}
+	return (dst);
 }

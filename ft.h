@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:17:01 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:57:47 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 18:10:36 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_data
 	t_spec		*spec;
 	int			i;
 	char		buff[BUFF_SIZE + 1];
-	int			total;
+	int			len;
 	int			arg_len;
 }				t_data;
 
@@ -47,6 +47,8 @@ char			*ft_strnew(size_t size);
 void			ft_putchar(char c);
 void			ft_putstr(char const *str);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
+void			*ft_memalloc(size_t size);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 
 char			*new_itoa(long long n);
 char			*ft_utoa(unsigned long long n);

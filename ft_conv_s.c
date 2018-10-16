@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:57:49 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:32:12 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:33:55 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_conv_s(va_list ap, t_spec *spec, t_data *data)
 	char	*str;
 
 	if (spec->mod[0] == 'l')
-		return (ft_print_ls(ap, spec));
+		return (ft_conv_ls(ap, spec, data));
 	else
 		str = va_arg(ap, char*);
 	if (str == NULL)

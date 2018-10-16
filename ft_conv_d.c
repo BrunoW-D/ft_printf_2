@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:54:52 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:24:38 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:42:06 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-long long	ft_check_mod(va_list ap, t_spec *spec)
+long long	ft_check_mod_d(va_list ap, t_spec *spec)
 {
 	long long	n;
 
@@ -90,7 +90,7 @@ char		*ft_conv_d(va_list ap, t_spec *spec, t_data *data)
 	char		*ret;
 	int			i;
 
-	n = ft_check_mod(ap, spec);
+	n = ft_check_mod_d(ap, spec);
 	if (!(ret = ft_check_prec(n, spec, ret, data)))
 		return (NULL);
 	if (!(ret = ft_check_flags(n, spec, ret, data)))

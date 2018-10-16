@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/10 11:30:07 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/11/10 14:52:02 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*ret;
+	char	ch;
+	int		i;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
+	ch = (char)c;
+	i = 0;
+	while (s[i])
+	{
+		if (ch == s[i])
+			return ((char*)s + i);
+		i++;
+	}
+	if (ch == '\0')
+		return ((char*)s + i);
+	else
 		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
 }

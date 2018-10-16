@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:58:36 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:40:32 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:41:26 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-unsigned long long	ft_check_mod(va_list ap, t_spec *spec)
+unsigned long long	ft_check_mod_x(va_list ap, t_spec *spec)
 {
 	unsigned long long	x;
 
@@ -22,7 +22,7 @@ unsigned long long	ft_check_mod(va_list ap, t_spec *spec)
 		x = va_arg(ap, unsigned long);
 	else if (spec->mod[0] == 'j')
 		x = va_arg(ap, uintmax_t);
-	else if (spec->mod[0] == sepc->mod[1] && spec->mod[1] == 'h')
+	else if (spec->mod[0] == spec->mod[1] && spec->mod[1] == 'h')
 		x = (unsigned char)va_arg(ap, int);
 	else if (spec->mod[0] == 'h')
 		x = (unsigned short)va_arg(ap, unsigned int);
@@ -38,6 +38,7 @@ char				*ft_conv_x(va_list ap, t_spec *spec, t_data *data)
 	unsigned long long	x;
 	char				*ret;
 
+	x = ft_check_mod_x(ap, spec);
 	if (x == 0 && spec->prec == -1)
 	{
 		if ((ret = ft_strdup("")) == NULL)

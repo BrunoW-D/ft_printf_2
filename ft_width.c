@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 17:34:24 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:44:24 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 19:43:52 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_width(char *str, int len, t_spec *spec)
 {
 	int	left;
-
+/* realloccat au lieu de realloc_free */	
 	left = spec->width - len;
 	if (left <= 0)
 		return (str);
@@ -29,7 +29,7 @@ char	*ft_width(char *str, int len, t_spec *spec)
 		else
 			spec->flags[1] = 0;
 	}
-	if (sepc->flags[1] == 1)
+	if (spec->flags[1] == 1)
 	{
 		if (!(str = ft_realloc_free(str, ft_nchar(' ', left))))
 			return (NULL);

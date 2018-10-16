@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/10 12:21:12 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/11/10 14:03:24 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*ret;
+	size_t	i;
+	size_t	j;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
-		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
+	i = 0;
+	while (dst[i])
+		i++;
+	j = 0;
+	while (src[j] && i + j + 1 < size)
+	{
+		dst[i + j] = src[j];
+		j++;
+	}
+	dst[i + j] = '\0';
+	if (size < i)
+		return (size + ft_strlen((char*)src));
+	else
+		return (i + ft_strlen((char*)src));
 }

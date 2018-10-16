@@ -6,7 +6,7 @@
 #    By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 13:37:42 by bwang-do          #+#    #+#              #
-#    Updated: 2018/10/16 17:02:05 by bwang-do         ###   ########.fr        #
+#    Updated: 2018/10/16 17:06:23 by bwang-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRC = ft_get_arg.c \
 
 LIB_SRC = ft_bzero.c \
 		  ft_memset.c \
+		  ft_memalloc.c \
+		  ft_memcpy.c \
 		  ft_strlen.c \
 		  ft_strdup.c \
 		  ft_strcpy.c \

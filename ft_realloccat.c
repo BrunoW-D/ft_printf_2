@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:17:23 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:59:10 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 18:41:08 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	*ft_memdup(void *src, size_t len)
 {
-	int		i;
-	void	*cpy;
+	int			i;
+	void		*cpy;
+	char		*c;
+	const char	*s;
 
 	if ((cpy = (void*)malloc(sizeof(void) * len)) == NULL)
 		return (NULL);
+	c = (char*)cpy;
+	s = (const char*)src;
 	i = 0;
-	while (i < len2)
+	while (i < len)
 	{
-		cpy[i] = src[i];
+		c[i] = s[i];
 		i++;
 	}
 	return (cpy);
@@ -30,13 +34,18 @@ void	*ft_memdup(void *src, size_t len)
 
 void	*ft_memcat(void *dest, void *src, size_t len1, size_t len2)
 {
-	int	i;
+	int			i;
+	int			j;
+	char		*d;
+	const char	*s;
 
 	i = len1;
 	j = 0;
-	while (i < len2)
+	d = (char*)dest;
+	s = (const char*)src;
+	while (j < len2)
 	{
-		dest[i] = src[j];
+		d[i] = s[j];
 		i++;
 		j++;
 	}
@@ -53,7 +62,8 @@ void	*ft_realloccat(void *p1, void *p2, size_t len1, size_t len2)
 		return (p1 = ft_memdup(p2, len2));
 	if (!p2)
 		return (p1);
-	tmp = ft_memdup(p1);
+	tmp = ft_memdup(p1, len1);
+	p1 = NULL;
 	if ((p1 = ft_memalloc(len1 + len2)) == NULL)
 		return (NULL);
 	p1 = ft_memcpy(p1, tmp, len1);

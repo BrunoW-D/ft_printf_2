@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:55:36 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:25:43 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:32:23 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 char	*ft_conv_ld(va_list ap, t_spec *spec, t_data *data)
 {
 	spec->mod[0] = 'l';
-	return (ft_print_d(ap, spec, data));
+	return (ft_conv_d(ap, spec, data));
 }

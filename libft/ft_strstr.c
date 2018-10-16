@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_lx.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 18:56:44 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:33:08 by bwang-do         ###   ########.fr       */
+/*   Created: 2017/11/10 10:44:50 by bwang-do          #+#    #+#             */
+/*   Updated: 2017/11/16 11:59:45 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-char	*ft_conv_lx(va_list ap, t_spec *spec, t_data *data)
+char	*ft_strstr(const char *str, const char *to_find)
 {
-	char	*ret;
+	char	*ptr1;
+	char	*ptr2;
+	char	*s;
 
-	if ((ret = ft_conv_x(ap, spec, data)) == NULL)
-		return (NULL);
-	ret = ft_strupper(ret);
-	if (spec->flags[0] && ret && ret[1])
-		ret[1] = 'X';
-	return (ret);
+	s = (char*)str;
+	if (!*to_find)
+		return (s);
+	while (*s)
+	{
+		if (*s == *to_find)
+		{
+			ptr1 = s;
+			ptr2 = (char*)to_find;
+			while (*ptr1 && *ptr2 && *ptr1 == *ptr2)
+			{
+				ptr1++;
+				ptr2++;
+			}
+			if (!*ptr2)
+				return (s);
+		}
+		s++;
+	}
+	return (NULL);
 }

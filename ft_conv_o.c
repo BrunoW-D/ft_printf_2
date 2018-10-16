@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:57:08 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:39:46 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/16 17:40:14 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-unsigned long long	ft_check_mod(va_list ap, t_spec *spec)
+unsigned long long	ft_check_mod_o(va_list ap, t_spec *spec)
 {
 	unsigned long long	o;
 
@@ -26,7 +26,7 @@ unsigned long long	ft_check_mod(va_list ap, t_spec *spec)
 		o = (unsigned char)va_arg(ap, int);
 	else if (spec->mod[0] == 'h')
 		o = (unsigned short)va_arg(ap, unsigned int);
-	else if (sepc->mod[0] == 'z')
+	else if (spec->mod[0] == 'z')
 		o = va_arg(ap, size_t);
 	else
 		o = va_arg(ap, unsigned int);
@@ -38,7 +38,7 @@ char				*ft_conv_o(va_list ap, t_spec *spec, t_data *data)
 	unsigned long long	o;
 	char				*ret;
 
-	o = ft_check_mod(ap, spec);
+	o = ft_check_mod_o(ap, spec);
 	if (o == 0 && spec->prec == -1)
 	{
 		if ((ret = ft_strdup("")) == NULL)
@@ -47,7 +47,7 @@ char				*ft_conv_o(va_list ap, t_spec *spec, t_data *data)
 	else if ((ret = ft_base(o, 8)) == NULL)
 		return (NULL);
 	data->arg_len = ft_strlen(ret);
-	if (spec->prec > len)
+	if (spec->prec > data->arg_len)
 	{
 		ret = ft_realloc_free(ft_nchar('0', spec->prec - data->arg_len), ret);
 		if (ret == NULL)
