@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:17:01 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 18:10:36 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:07:25 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char			*ft_realloc_free(char *str1, char *str2);
 char			*ft_base(long long n, int base);
 char			*ft_wchar_to_char(wchar_t wc);
 int				ft_printf(const char *format, ...);
-char			*ft_width(char *str, int len, t_spec *spec);
+char			*ft_width(char *str, int len, t_spec *spec, t_data *data);
 
 char			*ft_conv_c(va_list ap, t_spec *spec, t_data *data);
 char			*ft_conv_lc(va_list ap, t_spec *spec, t_data *data);

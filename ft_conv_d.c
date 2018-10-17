@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:54:52 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:42:06 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:04:27 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ char		*ft_check_flags(long long n, t_spec *spec, char *ret, t_data *data)
 	{
 		if (spec->flags[1] == 2)
 		{
-			if ((ret = ft_width(ret, data->arg_len + 1, spec)) == NULL)
+			if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
 				return (NULL);
 		}
 		if ((ret = ft_realloc_free(ft_strdup("+"), ret)) == NULL)
 			return (NULL);
 		if (spec->flags[1] != 2)
 		{
-			if ((ret = ft_width(ret, data->arg_len + 1, spec)) == NULL)
+			if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
 				return (NULL);
 		}
 	}
@@ -76,10 +76,10 @@ char		*ft_check_flags(long long n, t_spec *spec, char *ret, t_data *data)
 	{
 		if ((ret = ft_realloc_free(ft_strdup(" "), ret)) == NULL)
 			return (NULL);
-		if ((ret = ft_width(ret, data->arg_len + 1, spec)) == NULL)
+		if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
 			return (NULL);
 	}
-	else if ((ret = ft_width(ret, data->arg_len, spec)) == NULL)
+	else if ((ret = ft_width(ret, data->arg_len, spec, data)) == NULL)
 		return (NULL);
 	return (ret);
 }

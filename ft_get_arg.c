@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 16:09:42 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 18:46:09 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		get_num(const char *f, t_data *data)
 	if (f[data->i] == '.')
 	{
 		(data->i)++;
-		if (f[data->i] < '0' || f[data->i] > '9')
+		if (f[data->i] <= '0' || f[data->i] > '9')
 		{
 			(data->i)--;
 			return (-1);
@@ -95,18 +95,23 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 	i = data->i;
 	(data->i)++;
 	ft_get_spec(f, data, i);
-	if (f[data->i] == '%')
+	if (is_format_type(f[data->i]))
+		return (ft_controller(f[(data->i)++], ap, data));
+	else if (f[data->i] == '%')
 	{
 		(data->i)++;
-		if ((str = ft_width(ft_strdup("%"), 1, data->spec)) == NULL)
+		if ((str = ft_width(ft_strdup("%"), 1, data->spec, data)) == NULL)
 			return (NULL);
 		data->arg_len = ft_strlen(str);
 		return (str);
 	}
-	else if (is_format_type(f[data->i]))
-		return (ft_controller(f[(data->i)++], ap, data));
-	else
-		return (NULL);
-	(data->i)++;
+	else if (f[data->i])
+	{
+		if ((str = ft_strsub(f, i, data->i - i)) == NULL)
+			return (NULL);
+		(data->i)++;
+		data->arg_len = ft_strlen(str);
+		return (str);
+	}
 	return (NULL);
 }

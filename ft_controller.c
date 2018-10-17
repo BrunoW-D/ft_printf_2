@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:49:23 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:31:15 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:02:30 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ char	*ft_controller(char c, va_list ap, t_data *data)
 		{
 			if ((arg = g_p[i](ap, data->spec, data)) == NULL)
 				return (NULL);
-			len = ft_strlen(arg);
-			if (len)
-				data->arg_len = len;
-			else
-				data->arg_len = 1;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:57:08 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 17:40:14 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:05:44 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ char				*ft_conv_o(va_list ap, t_spec *spec, t_data *data)
 	if (spec->flags[0] && ret[0] != '0')
 		if ((ret = ft_realloc_free(ft_strdup("0"), ret)) == NULL)
 			return (NULL);
-	return (ft_width(ret, ft_strlen(ret), spec));
+	return (ft_width(ret, ft_strlen(ret), spec, data));
 }

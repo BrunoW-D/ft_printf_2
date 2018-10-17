@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/16 18:10:28 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/17 16:14:25 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ char	*ft_process(const char *f, va_list ap, t_data *data)
 	{
 		if (i == BUFF_SIZE)
 		{
-			if ((ft_buff_cat(str, data, i)) == NULL)
+			if ((str = ft_buff_cat(str, data, i)) == NULL)
 			   return (NULL);
 			i = 0;
 		}
 		if (f[data->i] == '%')
 		{
-			if ((ft_buff_cat(str, data, i)) == NULL)
+			if ((str = ft_buff_cat(str, data, i)) == NULL)
 				return (NULL);
 			i = 0;
 			arg = ft_get_arg(f, ap, data);
