@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:54:52 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:04:27 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:55:19 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ long long	ft_check_mod_d(va_list ap, t_spec *spec)
 
 char		*ft_check_prec(long long n, t_spec *spec, char *ret, t_data *data)
 {
-	if (n == 0 && spec->prec == -1)
+	if (n == 0 && spec->prec == 0)
 	{
 		if ((ret = ft_strdup("")) == NULL)
 			return (NULL);

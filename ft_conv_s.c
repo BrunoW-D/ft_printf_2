@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:57:49 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:06:11 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:54:21 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_conv_s(va_list ap, t_spec *spec, t_data *data)
 		if ((str = ft_strdup("(null)")) == NULL)
 			return (NULL);
 	}
-	if (spec->prec > 0)
+	if (spec->prec >= 0)
 	{
 		if ((str = ft_strsub(str, 0, spec->prec)) == NULL)
 			return (NULL);

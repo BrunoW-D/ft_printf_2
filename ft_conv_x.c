@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:58:36 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:06:57 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:56:45 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char				*ft_conv_x(va_list ap, t_spec *spec, t_data *data)
 	char				*ret;
 
 	x = ft_check_mod_x(ap, spec);
-	if (x == 0 && spec->prec == -1)
+	if (x == 0 && spec->prec == 0)
 	{
 		if ((ret = ft_strdup("")) == NULL)
 			return (NULL);

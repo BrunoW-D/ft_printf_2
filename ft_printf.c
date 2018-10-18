@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 16:14:25 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:58:07 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_data	*init_data(t_data *data)
 		i++;
 	}
 	spec->width = 0;
-	spec->prec = 0;
+	spec->prec = -1;
 	spec->mod[0] = 0;
 	spec->mod[1] = 0;
 	data->spec = spec;
@@ -50,7 +50,7 @@ t_data	*reset_data(t_data *data)
 		i++;
 	}
 	data->spec->width = 0;
-	data->spec->prec = 0;
+	data->spec->prec = -1;
 	data->spec->mod[0] = 0;
 	data->spec->mod[1] = 0;
 	data->arg_len = 0;

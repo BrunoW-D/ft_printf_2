@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 18:46:09 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:53:08 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_num(const char *f, t_data *data)
 		if (f[data->i] <= '0' || f[data->i] > '9')
 		{
 			(data->i)--;
-			return (-1);
+			return (0);
 		}
 	}
 	while (f[data->i] >= '0' && f[data->i] <= '9')
@@ -67,21 +67,29 @@ void	ft_get_spec(const char *f, t_data *data, int i)
 	{
 		if (f[data->i] == '#')
 			data->spec->flags[0] = 1;
-		if (f[data->i] == '-')
+		else if (f[data->i] == '-')
 			data->spec->flags[1] = 1;
-		if (f[data->i] == '+')
+		else if (f[data->i] == '+')
 			data->spec->flags[2] = 1;
-		if (f[data->i] == ' ' && !data->spec->flags[2])
-			data->spec->flags[2] = 2;
-		if (f[data->i] == '0' && !data->spec->flags[1])
-			data->spec->flags[1] = 2;
-		if (f[data->i] >= '1' && f[data->i] <= '9')
+		else if (f[data->i] == ' ')
+		{
+			if (data->spec->flags[2] != 1)
+				data->spec->flags[2] = 2;
+		}
+		else if (f[data->i] == '0')
+		{
+			if (data->spec->flags[1] != 1)
+				data->spec->flags[1] = 2;
+		}
+		else if (f[data->i] >= '1' && f[data->i] <= '9')
 			data->spec->width = get_num(f, data);
-		if (f[data->i] == '.')
+		else if (f[data->i] == '.')
 			data->spec->prec = get_num(f, data);
-		if (f[data->i] == 'h' || f[data->i] == 'l'
+		else if (f[data->i] == 'h' || f[data->i] == 'l'
 				|| f[data->i] == 'j' || f[data->i] == 'z')
 			get_modifier(f, data);
+		else
+			return ;
 		(data->i)++;
 	}
 }
@@ -92,22 +100,21 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 	char	*str;
 
 	str = NULL;
-	i = data->i;
 	(data->i)++;
+	i = data->i;
 	ft_get_spec(f, data, i);
 	if (is_format_type(f[data->i]))
 		return (ft_controller(f[(data->i)++], ap, data));
 	else if (f[data->i] == '%')
 	{
-		(data->i)++;
 		if ((str = ft_width(ft_strdup("%"), 1, data->spec, data)) == NULL)
 			return (NULL);
-		data->arg_len = ft_strlen(str);
+		(data->i)++;
 		return (str);
 	}
 	else if (f[data->i])
 	{
-		if ((str = ft_strsub(f, i, data->i - i)) == NULL)
+		if ((str = ft_strsub(f, data->i, 1)) == NULL)
 			return (NULL);
 		(data->i)++;
 		data->arg_len = ft_strlen(str);
