@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/18 18:53:08 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:07:17 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 	else if (f[data->i])
 	{
 		if ((str = ft_strsub(f, data->i, 1)) == NULL)
+			return (NULL);
+		if ((str = ft_width(str, 1, data->spec, data)) == NULL)
 			return (NULL);
 		(data->i)++;
 		data->arg_len = ft_strlen(str);

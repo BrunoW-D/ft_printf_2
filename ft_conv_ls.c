@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:56:11 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/18 18:54:29 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/19 19:56:13 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_conv_ls(va_list ap, t_spec *spec, t_data *data)
 {
 	wchar_t *ws;
 	char	*ret;
+	int		i;
 
 	// ?? spec->flags[0] += 0;
 	ws = va_arg(ap, wchar_t*);
@@ -23,17 +24,20 @@ char	*ft_conv_ls(va_list ap, t_spec *spec, t_data *data)
 	{
 		if ((ret = ft_strdup("(null)")) == NULL)
 			return (NULL);
-		data->arg_len = 8;
+		data->arg_len = 6;
 		return (ret);
 	}
-	else
+	if (spec->prec >= 0)
 	{
-		while (*ws)
-		{
-			if ((ret = ft_realloc_free(ret, ft_wchar_to_char(*ws))) == NULL)
-				return (NULL);
-			ws++;
-		}
+		//ws = (wchar_t*)(ws >> (8 * (ft_strlen((char*)ws) - spec->prec)));
+		//if ((ws = ft_strsub(ws, 0, spec->prec)) == NULL)
+		//	return (NULL);
+	}
+	while (*ws)
+	{
+		if ((ret = ft_realloc_free(ret, ft_wchar_to_char(*ws))) == NULL)
+			return (NULL);
+		ws++;
 	}
 	if (spec->prec >= 0)
 	{

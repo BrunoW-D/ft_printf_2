@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:58:05 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:06:25 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:50:56 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ char	*ft_conv_u(va_list ap, t_spec *spec, t_data *data)
 		n = va_arg(ap, unsigned int);
 	if ((ret = ft_utoa(n)) == NULL)
 		return (NULL);
+	if (spec->prec == 0)
+	{
+		free(ret);
+		if ((ret = ft_strdup("")) == NULL)
+			return (NULL);
+	}
 	len = ft_strlen(ret);
 	if (spec->prec > len)
 	{
