@@ -6,17 +6,15 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:58:05 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 17:50:56 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 20:08:13 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-char	*ft_conv_u(va_list ap, t_spec *spec, t_data *data)
+static char	*ft_check_mod(va_list ap, t_spec *spec, char *ret)
 {
 	unsigned long long int	n;
-	char					*ret;
-	int						len;
 
 	if (spec->mod[0] == spec->mod[1] && spec->mod[1] == 'l')
 		n = va_arg(ap, unsigned long long);
@@ -34,6 +32,16 @@ char	*ft_conv_u(va_list ap, t_spec *spec, t_data *data)
 		n = va_arg(ap, unsigned int);
 	if ((ret = ft_utoa(n)) == NULL)
 		return (NULL);
+	return (ret);
+}
+
+char		*ft_conv_u(va_list ap, t_spec *spec, t_data *data)
+{
+	char	*ret;
+	int		len;
+
+	if (ft_check_mod(ap, spec, ret) == NULL)
+		return (NULL);
 	if (spec->prec == 0)
 	{
 		free(ret);
@@ -43,7 +51,7 @@ char	*ft_conv_u(va_list ap, t_spec *spec, t_data *data)
 	len = ft_strlen(ret);
 	if (spec->prec > len)
 	{
-		if ((ret = ft_realloc_free(ft_nchar('0', spec->prec - len), ret)) == NULL)
+		if (!(ret = ft_realloc_free(ft_nchar('0', spec->prec - len), ret)))
 			return (NULL);
 	}
 	return (ft_width(ret, ft_strlen(ret), spec, data));

@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:17:01 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/22 17:06:53 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:11:32 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 void			*ft_memalloc(size_t size);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 
-char			*new_itoa(long long n);
+char			*ft_lltoa(long long n);
 char			*ft_utoa(unsigned long long n);
 char			*ft_strupper(char *str);
 

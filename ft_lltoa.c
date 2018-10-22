@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_itoa.c                                         :+:      :+:    :+:   */
+/*   ft_lltoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 17:03:10 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/08 17:03:22 by bwang-do         ###   ########.fr       */
+/*   Created: 2018/10/22 19:11:04 by bwang-do          #+#    #+#             */
+/*   Updated: 2018/10/22 19:18:58 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,24 @@ static char	*ft_init_negative(int len, long long *nb)
 	return (str);
 }
 
-char		*new_itoa(long long n)
+static char	*ft_raw(long long n)
+{
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -9223372036854775807 - 1)
+		return (ft_strdup("-9223372036854775808"));
+	else
+		return (NULL);
+}
+
+char		*ft_lltoa(long long n)
 {
 	char		*str;
 	long long	nb;
 	int			len;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n == -9223372036854775807 - 1)
-		return (ft_strdup("-9223372036854775808"));
+	if (n == 0 || n == -9223372036854775807 - 1)
+		return (ft_raw(n));
 	nb = n;
 	len = 1;
 	while (nb /= 10)

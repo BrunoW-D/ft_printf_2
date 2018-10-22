@@ -6,7 +6,7 @@
 #    By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 13:37:42 by bwang-do          #+#    #+#              #
-#    Updated: 2018/10/16 17:06:23 by bwang-do         ###   ########.fr        #
+#    Updated: 2018/10/22 19:11:47 by bwang-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = ft_get_arg.c \
 	  ft_controller.c \
 	  ft_base.c \
 	  ft_nchar.c \
-	  new_itoa.c \
+	  ft_lltoa.c \
 	  ft_utoa.c \
 	  ft_printf.c \
 	  ft_conv_s.c \

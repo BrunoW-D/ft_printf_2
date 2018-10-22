@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:57:08 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/18 18:56:05 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 20:15:17 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char				*ft_conv_o(va_list ap, t_spec *spec, t_data *data)
 {
 	unsigned long long	o;
 	char				*ret;
+	int					len;
 
 	o = ft_check_mod_o(ap, spec);
 	if (o == 0 && spec->prec == 0)
@@ -46,10 +47,10 @@ char				*ft_conv_o(va_list ap, t_spec *spec, t_data *data)
 	}
 	else if ((ret = ft_base(o, 8)) == NULL)
 		return (NULL);
-	data->arg_len = ft_strlen(ret);
-	if (spec->prec > data->arg_len)
+	len = ft_strlen(ret);
+	if (spec->prec > len)
 	{
-		ret = ft_realloc_free(ft_nchar('0', spec->prec - data->arg_len), ret);
+		ret = ft_realloc_free(ft_nchar('0', spec->prec - len), ret);
 		if (ret == NULL)
 			return (NULL);
 	}

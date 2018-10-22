@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:54:52 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/22 16:30:54 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 20:00:15 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-long long	ft_check_mod_d(va_list ap, t_spec *spec)
+static long long	ft_check_mod(va_list ap, t_spec *spec)
 {
 	long long	n;
 
@@ -33,24 +33,25 @@ long long	ft_check_mod_d(va_list ap, t_spec *spec)
 	return (n);
 }
 
-char		*ft_check_prec(long long n, t_spec *spec, char *ret, t_data *data)
+static char			*ft_check_prec(long long n, t_spec *spec, char *ret)
 {
+	int	len;
+
 	if (n == 0 && spec->prec == 0)
 	{
 		if ((ret = ft_strdup("")) == NULL)
 			return (NULL);
 	}
-	else if ((ret = new_itoa(n)) == NULL)
+	else if ((ret = ft_lltoa(n)) == NULL)
 		return (NULL);
-	data->arg_len = ft_strlen(ret);
+	len = ft_strlen(ret);
 	if (n < 0)
-		(data->arg_len)--;
+		len--;
 	if (spec->prec > 0)
 	{
-		if (spec->prec > data->arg_len)
+		if (spec->prec > len)
 		{
-			ret = ft_realloc_free(ft_nchar('0', spec->prec - data->arg_len), ret);
-			if (ret == NULL)
+			if (!(ret = ft_realloc_free(ft_nchar('0', spec->prec - len), ret)))
 				return (NULL);
 		}
 		else if (!n)
@@ -59,40 +60,42 @@ char		*ft_check_prec(long long n, t_spec *spec, char *ret, t_data *data)
 				return (NULL);
 		}
 	}
-	data->arg_len = ft_strlen(ret);
 	return (ret);
 }
 
-char		*ft_check_flags(long long n, t_spec *spec, char *ret, t_data *data)
+static char			*ft_check_flags(long long n, t_spec *spec, char *ret, t_data *data)
 {
+	int	len;
+
+	len = ft_strlen(ret);
 	if (spec->flags[2] == 1 && n >= 0)
 	{
 		if (spec->flags[1] == 2)
 		{
-			if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
+			if ((ret = ft_width(ret, len + 1, spec, data)) == NULL)
 				return (NULL);
 		}
 		if ((ret = ft_realloc_free(ft_strdup("+"), ret)) == NULL)
 			return (NULL);
 		if (spec->flags[1] != 2)
 		{
-			if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
+			if ((ret = ft_width(ret, len + 1, spec, data)) == NULL)
 				return (NULL);
 		}
 	}
 	else if (spec->flags[2] == 2 && n >= 0)
 	{
-		if ((ret = ft_width(ret, data->arg_len + 1, spec, data)) == NULL)
+		if ((ret = ft_width(ret, len + 1, spec, data)) == NULL)
 			return (NULL);
 		if ((ret = ft_realloc_free(ft_strdup(" "), ret)) == NULL)
 			return (NULL);
 	}
-	else if ((ret = ft_width(ret, data->arg_len, spec, data)) == NULL)
+	else if ((ret = ft_width(ret, len, spec, data)) == NULL)
 		return (NULL);
 	return (ret);
 }
 
-char		*ft_conv_d(va_list ap, t_spec *spec, t_data *data)
+char				*ft_conv_d(va_list ap, t_spec *spec, t_data *data)
 {
 	long long	n;
 	char		*ret;
@@ -100,8 +103,8 @@ char		*ft_conv_d(va_list ap, t_spec *spec, t_data *data)
 	int			done;
 
 	done = 0;
-	n = ft_check_mod_d(ap, spec);
-	if (!(ret = ft_check_prec(n, spec, ret, data)))
+	n = ft_check_mod(ap, spec);
+	if (!(ret = ft_check_prec(n, spec, ret)))
 		return (NULL);
 	if (n < 0)
 	{

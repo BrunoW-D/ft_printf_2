@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:55:15 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 16:49:21 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 19:20:30 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ char	*ft_conv_lc(va_list ap, t_spec *spec, t_data *data)
 	char	*ret;
 	wchar_t	wc;
 
-	/*
-	(spec->flags[0]) += 0;
-	*/
 	wc = va_arg(ap, wchar_t);
 	if (!wc)
 		return (ft_width(ft_strdup(""), 1, spec, data));
