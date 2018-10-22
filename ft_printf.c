@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/18 18:58:07 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:26:28 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_data	*init_data(t_data *data)
 	spec->prec = -1;
 	spec->mod[0] = 0;
 	spec->mod[1] = 0;
+	spec->conv = 0;
 	data->spec = spec;
 	data->len = 0;
 	ft_bzero(data->buff, BUFF_SIZE);
@@ -53,6 +54,7 @@ t_data	*reset_data(t_data *data)
 	data->spec->prec = -1;
 	data->spec->mod[0] = 0;
 	data->spec->mod[1] = 0;
+	data->spec->conv = 0;
 	data->arg_len = 0;
 	return (data);
 }
@@ -116,8 +118,7 @@ int		ft_printf(const char *format, ...)
 	va_end(ap);
 	if (str == NULL || data->len == 0)
 		return (0);
-	write(1, str, data->len);
-	len = data->len;
+	len = write(1, str, data->len);
 	free(str);
 	str = NULL;
 	free(data->spec);

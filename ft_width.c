@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 17:34:24 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 18:12:22 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:14:04 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,16 @@ char		*ft_width(char *str, int len, t_spec *spec, t_data *data)
 	if (left <= 0)
 		return (str);
 	if (spec->flags[1] == 2)
-		str = ft_prepend(str, len, '0', left);
+	{
+		if (spec->prec >= 0 && (spec->conv == 'x' || spec->conv == 'd'
+					|| spec->conv == 'o' || spec->conv == 'u'
+					|| spec->conv == 'X' || spec->conv == 'O'
+					|| spec->conv == 'p' || spec->conv == 'D'
+					|| spec->conv == 'u'))
+			spec->flags[1] = 0;
+		else
+			str = ft_prepend(str, len, '0', left);
+	}
 	if (spec->flags[1] == 1)
 		str = ft_append(str, len, ' ', left);
 	if (spec->flags[1] == 0)

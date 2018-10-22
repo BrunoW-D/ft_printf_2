@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:49:23 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:02:30 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:06:39 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ char	*ft_controller(char c, va_list ap, t_data *data)
 
 	init_p();
 	i = 0;
+	arg = NULL;
 	while (i <= 13)
 	{
 		if (c == g_types[i])
 		{
+			data->spec->conv = c;
 			if ((arg = g_p[i](ap, data->spec, data)) == NULL)
 				return (NULL);
 		}

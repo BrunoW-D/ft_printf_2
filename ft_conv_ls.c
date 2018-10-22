@@ -6,17 +6,38 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:56:11 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 19:56:13 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:49:26 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
+wchar_t	*ft_wssub(wchar_t const *ws, unsigned int start, size_t len)
+{
+	wchar_t	*dst;
+	size_t	i;
+
+	if (ws)
+	{
+		i = 0;
+		if ((dst = (wchar_t*)malloc(sizeof(wchar_t) * (len + 1))) == NULL)
+			return (NULL);
+		while (i < len)
+		{
+			dst[i] = ws[start + i];
+			i++;
+		}
+		dst[i] = '\0';
+		return (dst);
+	}
+	else
+		return (NULL);
+}
+
 char	*ft_conv_ls(va_list ap, t_spec *spec, t_data *data)
 {
 	wchar_t *ws;
 	char	*ret;
-	int		i;
 
 	// ?? spec->flags[0] += 0;
 	ws = va_arg(ap, wchar_t*);
@@ -29,20 +50,14 @@ char	*ft_conv_ls(va_list ap, t_spec *spec, t_data *data)
 	}
 	if (spec->prec >= 0)
 	{
-		//ws = (wchar_t*)(ws >> (8 * (ft_strlen((char*)ws) - spec->prec)));
-		//if ((ws = ft_strsub(ws, 0, spec->prec)) == NULL)
-		//	return (NULL);
+		if ((ws = ft_wssub(ws, 0, spec->prec)) == NULL)
+			return (NULL);
 	}
 	while (*ws)
 	{
 		if ((ret = ft_realloc_free(ret, ft_wchar_to_char(*ws))) == NULL)
 			return (NULL);
 		ws++;
-	}
-	if (spec->prec >= 0)
-	{
-		if ((ret = ft_strsub(ret, 0, spec->prec)) == NULL)
-			return (NULL);
 	}
 	return (ft_width(ret, ft_strlen(ret), spec, data));
 }

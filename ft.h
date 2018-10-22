@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:17:01 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/17 17:07:25 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 17:06:53 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_spec
 	int			width;
 	int			prec;
 	char		mod[2];
+	char		conv;
 }				t_spec;
 
 typedef struct	s_data

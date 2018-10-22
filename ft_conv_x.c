@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:58:36 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 19:05:35 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:57:14 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,20 @@ char				*ft_conv_x(va_list ap, t_spec *spec, t_data *data)
 	data->arg_len = ft_strlen(ret);
 	if (spec->flags[0] == 1 && x)
 	{
-		if ((ret = ft_width(ret, data->arg_len + 2, spec, data)) == NULL)
-			return (NULL);
-		if ((ret = ft_realloc_free(ft_strdup("0x"), ret)) == NULL)
-			return (NULL);
+		if (spec->prec == -1 && spec->flags[1] == 2)
+		{
+			if ((ret = ft_width(ret, data->arg_len + 2, spec, data)) == NULL)
+				return (NULL);
+			if ((ret = ft_realloc_free(ft_strdup("0x"), ret)) == NULL)
+				return (NULL);
+		}
+		else
+		{
+			if ((ret = ft_realloc_free(ft_strdup("0x"), ret)) == NULL)
+				return (NULL);
+			if ((ret = ft_width(ret, data->arg_len + 2, spec, data)) == NULL)
+				return (NULL);
+		}
 	}
 	else
 	{
