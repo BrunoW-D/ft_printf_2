@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/22 18:26:28 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/24 20:15:31 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-t_data	*init_data(t_data *data)
+t_data	*ft_init_data(t_data *data)
 {
 	int		i;
 	t_spec	*spec;
@@ -40,11 +40,12 @@ t_data	*init_data(t_data *data)
 	return (data);
 }
 
-t_data	*reset_data(t_data *data)
+t_data	*ft_reset_data(t_data *data)
 {
 	int		i;
 
 	i = 0;
+	data->len += data->arg_len;
 	while (i < 5)
 	{
 		data->spec->flags[i] = 0;
@@ -59,12 +60,13 @@ t_data	*reset_data(t_data *data)
 	return (data);
 }
 
-char	*ft_buff_cat(char *str, t_data *data, int i)
+char	*ft_buff_cat(char *str, t_data *data, int *i)
 {
-	if (!(str = ft_realloccat(str, data->buff, data->len, i)))
+	if (!(str = ft_realloccat(str, data->buff, data->len, *i)))
 		return (NULL);
 	ft_bzero(data->buff, BUFF_SIZE);
-	data->len += i;
+	data->len += *i;
+	*i = 0;
 	return (str);
 }
 
@@ -75,43 +77,40 @@ char	*ft_process(const char *f, va_list ap, t_data *data)
 	char	*str;
 
 	i = 0;
-	arg = NULL;
 	while (f[data->i])
 	{
 		if (i == BUFF_SIZE)
 		{
-			if ((str = ft_buff_cat(str, data, i)) == NULL)
-			   return (NULL);
-			i = 0;
+			if ((str = ft_buff_cat(str, data, &i)) == NULL)
+				return (NULL);
 		}
 		if (f[data->i] == '%')
 		{
-			if ((str = ft_buff_cat(str, data, i)) == NULL)
+			if ((str = ft_buff_cat(str, data, &i)) == NULL)
 				return (NULL);
-			i = 0;
 			arg = ft_get_arg(f, ap, data);
 			if (!(str = ft_realloccat(str, arg, data->len, data->arg_len)))
 				return (NULL);
-			data->len += data->arg_len;
-			data = reset_data(data);
+			// free arg
+			ft_reset_data(data);
 		}
 		else
 			data->buff[i++] = f[(data->i)++];
 	}
-	return (str = ft_buff_cat(str, data, i));
+	return (str = ft_buff_cat(str, data, &i));
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list ap;
-	char 	*str;
+	char	*str;
 	t_data	*data;
 	int		len;
 
 	len = 0;
 	if (format == NULL)
 		return (0);
-	if ((data = init_data(data)) == NULL)
+	if ((data = ft_init_data(data)) == NULL)
 		return (0);
 	va_start(ap, format);
 	str = ft_process(format, ap, data);

@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:17:01 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/22 19:11:32 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/24 19:58:17 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 void			*ft_memalloc(size_t size);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 
+void			*ft_memdup(void *src, size_t len);
+void			*ft_memcat(void *dest, void *src, size_t len1, size_t len2);
 char			*ft_lltoa(long long n);
 char			*ft_utoa(unsigned long long n);
 char			*ft_strupper(char *str);
@@ -59,6 +61,7 @@ char			*ft_get_arg(const char *format, va_list ap, t_data *data);
 char			*ft_controller(char c, va_list ap, t_data *data);
 char			*ft_nchar(char c, size_t n);
 void			*ft_realloccat(void *p1, void *p2, size_t len1, size_t len2);
+void			*ft_realloccat_free(void *p1, void *p2, size_t l1, size_t l2);
 char			*ft_realloc_free(char *str1, char *str2);
 char			*ft_base(long long n, int base);
 char			*ft_wchar_to_char(wchar_t wc);

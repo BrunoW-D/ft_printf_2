@@ -6,7 +6,7 @@
 #    By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 13:37:42 by bwang-do          #+#    #+#              #
-#    Updated: 2018/10/22 19:11:47 by bwang-do         ###   ########.fr        #
+#    Updated: 2018/10/24 19:54:41 by bwang-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME = libftprintf.a
 
 SRC = ft_get_arg.c \
 	  ft_realloccat.c \
+	  ft_realloccat_free.c \
 	  ft_realloc_free.c \
 	  ft_wchar_to_char.c \
 	  ft_controller.c \

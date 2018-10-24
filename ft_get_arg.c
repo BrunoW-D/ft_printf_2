@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/19 17:07:17 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/24 20:14:33 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,13 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 	int		i;
 	char	*str;
 
-	str = NULL;
-	(data->i)++;
-	i = data->i;
+	i = ++(data->i);
 	ft_get_spec(f, data, i);
 	if (is_format_type(f[data->i]))
 		return (ft_controller(f[(data->i)++], ap, data));
 	else if (f[data->i] == '%')
 	{
-		if ((str = ft_width(ft_strdup("%"), 1, data->spec, data)) == NULL)
-			return (NULL);
+		str = ft_width(ft_strdup("%"), 1, data->spec, data);
 		(data->i)++;
 		return (str);
 	}
