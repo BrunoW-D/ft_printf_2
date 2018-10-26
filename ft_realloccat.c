@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:17:23 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/24 19:40:16 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/26 20:03:58 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ void	*ft_memcat(void *dest, void *src, size_t len1, size_t len2)
 void	*ft_realloccat(void *p1, void *p2, size_t len1, size_t len2)
 {
 	void	*tmp;
+	void	*ret;
 
 	if (!p1 && !p2)
 		return (NULL);
 	if (!p1 && p2)
-		return (p1 = ft_memdup(p2, len2));
+		return (ret = ft_memdup(p2, len2));
 	if (!p2)
 		return (p1);
 	tmp = ft_memdup(p1, len1);
 	free(p1);
-	p1 = NULL;
-	if ((p1 = ft_memalloc(len1 + len2)) == NULL)
+	if ((ret = ft_memalloc(len1 + len2)) == NULL)
 		return (NULL);
-	p1 = ft_memcpy(p1, tmp, len1);
-	p1 = ft_memcat(p1, p2, len1, len2);
+	ret = ft_memcpy(ret, tmp, len1);
+	ret = ft_memcat(ret, p2, len1, len2);
 	free(tmp);
-	return (p1);
+	return (ret);
 }

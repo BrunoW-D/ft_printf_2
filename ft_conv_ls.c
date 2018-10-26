@@ -6,13 +6,13 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 18:56:11 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/22 19:03:36 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/26 19:16:27 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-wchar_t	*ft_wssub(wchar_t const *ws, unsigned int start, size_t len)
+wchar_t	*ft_wssub(wchar_t *ws, unsigned int start, size_t len)
 {
 	wchar_t	*dst;
 	size_t	i;
@@ -47,11 +47,13 @@ char	*ft_conv_ls(va_list ap, t_spec *spec, t_data *data)
 		data->arg_len = 6;
 		return (ret);
 	}
+	/*
 	if (spec->prec >= 0)
 	{
 		if ((ws = ft_wssub(ws, 0, spec->prec)) == NULL)
 			return (NULL);
 	}
+	*/
 	while (*ws)
 	{
 		if ((ret = ft_realloc_free(ret, ft_wchar_to_char(*ws))) == NULL)

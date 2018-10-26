@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 17:34:24 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/24 20:09:54 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/26 17:38:40 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*ft_prepend(char *str, int len, char c, int left)
 
 	if ((filler = ft_nchar(c, left)) == NULL)
 		return (NULL);
-	if ((str = ft_realloccat(filler, str, left, len)) == NULL)
+	if ((str = ft_realloccat_free(filler, str, left, len)) == NULL)
 		return (NULL);
 	return (str);
 }
@@ -29,7 +29,7 @@ static char	*ft_append(char *str, int len, char c, int left)
 
 	if ((filler = ft_nchar(c, left)) == NULL)
 		return (NULL);
-	if ((str = ft_realloccat(str, filler, len, left)) == NULL)
+	if ((str = ft_realloccat_free(str, filler, len, left)) == NULL)
 		return (NULL);
 	return (str);
 }

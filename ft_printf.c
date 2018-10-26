@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/24 20:15:31 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/26 17:41:58 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,8 @@ char	*ft_process(const char *f, va_list ap, t_data *data)
 			if ((str = ft_buff_cat(str, data, &i)) == NULL)
 				return (NULL);
 			arg = ft_get_arg(f, ap, data);
-			if (!(str = ft_realloccat(str, arg, data->len, data->arg_len)))
+			if (!(str = ft_realloccat_free(str, arg, data->len, data->arg_len)))
 				return (NULL);
-			// free arg
 			ft_reset_data(data);
 		}
 		else
@@ -115,11 +114,14 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	str = ft_process(format, ap, data);
 	va_end(ap);
-	if (str == NULL || data->len == 0)
-		return (0);
-	len = write(1, str, data->len);
-	free(str);
-	str = NULL;
+	if (str == NULL)
+		len = 0;
+	else
+	{
+		len = write(1, str, data->len);
+		free(str);
+		str = NULL;
+	}
 	free(data->spec);
 	free(data);
 	data = NULL;
