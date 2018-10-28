@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:21:42 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/26 17:41:58 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/28 17:17:11 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*ft_process(const char *f, va_list ap, t_data *data)
 	char	*str;
 
 	i = 0;
+	str = NULL;
 	while (f[data->i])
 	{
 		if (i == BUFF_SIZE)
@@ -86,8 +87,7 @@ char	*ft_process(const char *f, va_list ap, t_data *data)
 		}
 		if (f[data->i] == '%')
 		{
-			if ((str = ft_buff_cat(str, data, &i)) == NULL)
-				return (NULL);
+			str = ft_buff_cat(str, data, &i);
 			arg = ft_get_arg(f, ap, data);
 			if (!(str = ft_realloccat_free(str, arg, data->len, data->arg_len)))
 				return (NULL);

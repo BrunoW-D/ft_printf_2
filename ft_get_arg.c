@@ -6,7 +6,7 @@
 /*   By: bwang-do <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 18:48:29 by bwang-do          #+#    #+#             */
-/*   Updated: 2018/10/26 17:22:51 by bwang-do         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:36:45 by bwang-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*ft_get_arg(const char *f, va_list ap, t_data *data)
 	char	*str;
 
 	i = ++(data->i);
+	str = NULL;
 	ft_get_spec(f, data, i);
 	if (is_format_type(f[data->i]))
 		return (ft_controller(f[(data->i)++], ap, data));
